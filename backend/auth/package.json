@@ -5,7 +5,9 @@
   "module": "esnext",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start" :"node ./src/index.js",
+    "build" : "tsc"
   },
   "keywords": [],
   "author": "",
