@@ -14,8 +14,9 @@ const serverConfig = (
   }
 
   app.use(middleware.compression())
-  app.use(middleware.helmet())
   app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
+  app.use(middleware.helmet({ xssFilter: true }))
 }
 
 export { serverConfig }
