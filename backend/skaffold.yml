@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+manifests:
+  rawYaml:
+    - "./infra/k8s-dev/**"
+    - "./infra/k8s/*"
+deploy:
+  kubectl: {}
+build:
+  local:
+    push: false
+  artifacts:
+    - image: aswines/ticketing-auth
+      context: auth
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - dest: "src/**/*.ts"
+            src: '.'
