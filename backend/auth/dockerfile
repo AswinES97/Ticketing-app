@@ -6,7 +6,7 @@ RUN npm install
 COPY . .
 # RUN npm run build
 
-CMD [ "npm","dev" ]
+CMD [ "npm","run","dev" ]
 
 # FROM gcr.io/distroless/nodejs18-debian11 as prod
 # FROM node:18.16.0-alpine as prod

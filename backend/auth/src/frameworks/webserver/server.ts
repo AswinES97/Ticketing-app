@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { type Request, type Response } from 'express'
 
 import compression from 'compression'
 import helmet from 'helmet'
@@ -16,6 +16,10 @@ const thirdPartyMiddleware = {
 const app = express()
 
 serverConfig(app, express, thirdPartyMiddleware)
+
+app.get('/api/auth/hi', (req: Request, res: Response) => {
+  res.send('hi')
+})
 
 export default app
 export type thirdPartyMiddlewareType = typeof thirdPartyMiddleware
