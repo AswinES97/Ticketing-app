@@ -1,5 +1,5 @@
 import type { Application } from 'express'
-import type { expressType } from './types/types'
+import type { expressType } from '../../types/types'
 import type { thirdPartyMiddlewareType } from './server'
 import configKeys from '../../config/config'
 

@@ -1,5 +1,5 @@
 import { type Response, type Application, type Request } from 'express'
-import { type expressType } from '../types/types'
+import { type expressType } from '../../../types/types'
 
 import { userRouter } from './userRouter'
 import { NotFoundError } from '@ticket-common/common'
