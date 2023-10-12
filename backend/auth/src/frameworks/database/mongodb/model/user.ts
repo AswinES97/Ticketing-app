@@ -9,7 +9,7 @@ interface IUserModel extends mongoose.Model<IUserDoc> {
 }
 
 // interface for return user model/document
-interface IUserDoc extends mongoose.Document {
+export interface IUserDoc extends mongoose.Document {
   userId: string
   username?: string
   email?: string

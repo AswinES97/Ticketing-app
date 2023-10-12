@@ -7,6 +7,7 @@ export interface IUserAttr {
   username?: string
   email?: string
   phone?: string
+  password?: string
   isblocked: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
