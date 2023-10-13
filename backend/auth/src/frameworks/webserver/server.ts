@@ -1,8 +1,11 @@
 import express from 'express'
 
-import compression from 'compression'
 import helmet from 'helmet'
+import compression from 'compression'
 import morgan from 'morgan'
+import cookieParser from 'cookie-parser'
+import mongoSanitize from 'express-mongo-sanitize'
+
 import { errorHandlingMiddleware } from '@ticket-common/common'
 
 import { serverConfig } from './express-config'
@@ -12,7 +15,9 @@ import router from './routes'
 const thirdPartyMiddleware = {
   helmet,
   compression,
-  morgan
+  morgan,
+  mongoSanitize,
+  cookieParser
 }
 
 const app = express()

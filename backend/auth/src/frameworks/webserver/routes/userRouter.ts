@@ -1,5 +1,5 @@
 import { type Application, type Router } from 'express'
-import { type expressType } from '../types/types'
+import { type expressType } from '../../../types/types'
 
 import { userSignupRouter } from './user.signup'
 
