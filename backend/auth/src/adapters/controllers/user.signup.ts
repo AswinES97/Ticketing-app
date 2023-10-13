@@ -1,6 +1,9 @@
 import { type Request, type Response } from 'express'
 import { type UserSignupInterfaceType } from '../../application/repositories/userSignupDBInterface'
 import { type UserSignupImplType } from '../../frameworks/database/mongodb/repositories/user.signup'
+// import { type IUserAttr } from '../../types/types'
+
+// import { emailSignup } from '../../application/user-cases/auth/user'
 
 export const userSignupController = (
   UserSignupInterface: UserSignupInterfaceType,
@@ -11,7 +14,10 @@ export const userSignupController = (
   // const dbCall = new UserSignupInterface(new UserSignupImpl())
 
   const userEmailSignup = (req: Request, res: Response): void => {
-    res.status(200).send('hi')
+    // const userData: IUserAttr = req.body
+    // const newUser = await emailSignup(
+    //   userData
+    // )
   }
 
   return {

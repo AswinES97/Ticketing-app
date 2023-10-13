@@ -13,6 +13,7 @@ export const userSignupRouter = (express: expressType): Router => {
 
   router.post('/email',
     [
+      reqValidator.usernameValidator(),
       reqValidator.emailValidator(),
       reqValidator.passwordValidator(),
       reqValidator.validatorFn
