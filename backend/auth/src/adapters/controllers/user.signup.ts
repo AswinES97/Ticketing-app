@@ -8,11 +8,10 @@ export const userSignupController = (
 ): {
     userEmailSignup: (arg1: Request, arg2: Response) => void
   } => {
-//   const dbCall = new UserSignupInterface(new UserSignupImpl())
+  // const dbCall = new UserSignupInterface(new UserSignupImpl())
 
   const userEmailSignup = (req: Request, res: Response): void => {
-    // dbCall.emailSignup()
-    res.send('hi')
+    res.status(200).send('hi')
   }
 
   return {

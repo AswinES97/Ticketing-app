@@ -16,6 +16,10 @@ const serverConfig = (
   app.use(middleware.compression())
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
+  app.use(middleware.cookieParser())
+  app.use(middleware.mongoSanitize({
+    allowDots: true
+  }))
   app.use(middleware.helmet({ xssFilter: true }))
 }
 
