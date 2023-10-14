@@ -1,19 +1,17 @@
 import { type Request, type Response } from 'express'
-import { type UserSignupInterfaceType } from '../../application/repositories/userSignupDBInterface'
-import { type UserSignupImplType } from '../../frameworks/database/mongodb/repositories/user.signup'
+import { type IUserSignupParmeters } from '../../types/types'
 // import { type IUserAttr } from '../../types/types'
 
 // import { emailSignup } from '../../application/user-cases/auth/user'
 
 export const userSignupController = (
-  UserSignupInterface: UserSignupInterfaceType,
-  UserSignupImpl: UserSignupImplType
+  param: IUserSignupParmeters
 ): {
     userEmailSignup: (arg1: Request, arg2: Response) => void
   } => {
-  // const dbCall = new UserSignupInterface(new UserSignupImpl())
-
   const userEmailSignup = (req: Request, res: Response): void => {
+    res.send(param.serviceCalls.generateId())
+
     // const userData: IUserAttr = req.body
     // const newUser = await emailSignup(
     //   userData

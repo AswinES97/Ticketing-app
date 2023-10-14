@@ -1,4 +1,8 @@
 // express type
+
+import { type UserSignupDbInterface } from '../adapters/Interfaces/repositories/userSignupDBInterface'
+import { type UserSignupServiceI } from '../adapters/Interfaces/services/user'
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 export type expressType = typeof import('express')
 
@@ -11,4 +15,9 @@ export interface IUserAttr {
   isblocked: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
+}
+
+export interface IUserSignupParmeters {
+  userDbCalls: UserSignupDbInterface
+  serviceCalls: UserSignupServiceI
 }
