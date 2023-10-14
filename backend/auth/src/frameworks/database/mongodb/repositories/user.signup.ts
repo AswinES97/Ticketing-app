@@ -2,7 +2,7 @@ import { type IUserDoc, UserModel } from '../model/user'
 
 import { type IUserAttr } from '../../../../types/types'
 
-export class UserSignupImpl {
+export class UserSignupDbImpl {
   async email (userData: IUserAttr): Promise<IUserDoc> {
     const user = new UserModel({
       userId: userData.userId,
@@ -15,4 +15,4 @@ export class UserSignupImpl {
   }
 }
 
-export type UserSignupImplType = typeof UserSignupImpl
+export type UserSignupImplType = typeof UserSignupDbImpl
