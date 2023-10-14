@@ -15,4 +15,10 @@ export class UserSignupDbImpl {
   }
 }
 
+export class FindUserImpl {
+  async email (email: string): Promise<IUserDoc | null> {
+    return await UserModel.findOne({ email })
+  }
+}
+
 export type UserSignupImplType = typeof UserSignupDbImpl
