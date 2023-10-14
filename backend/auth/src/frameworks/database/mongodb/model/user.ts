@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 import { type IUserAttr } from '../../../../types/types'
-import { toHash } from '../../../services/password'
 
 // interface for user model
 interface IUserModel extends mongoose.Model<IUserDoc> {
@@ -57,15 +56,6 @@ const userSchema = new mongoose.Schema({
       delete ret.password
     }
   }
-})
-
-// pre hook before save
-userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    const hashed = await toHash(this.get('password') as string)
-    this.set('password', hashed)
-  }
-  next()
 })
 
 userSchema.statics.build = (attrs: IUserAttr) => {

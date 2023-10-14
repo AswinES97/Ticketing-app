@@ -1,9 +1,57 @@
 import request from 'supertest'
 import app from '../../server'
 
-it('Sample test for sigup', async () => {
+it('return 201 Created on successful request', async () => {
   return await request(app)
     .post('/api/v1/user/signup/email')
-    .send({ email: 'aswinedassery@gmail.com', password: 'Aswines@123' })
-    .expect(200)
+    .send({
+      username: 'aswin',
+      email: 'aswinedassery@gmail.com',
+      password: 'Aswines@123'
+    })
+    .expect(201)
+})
+
+it('return 400 Bad Request on no user', async () => {
+  return await request(app)
+    .post('/api/v1/user/signup/email')
+    .send({
+      username: '',
+      email: 'aswinedassery@gmail.com',
+      password: 'Aswines@123'
+    })
+    .expect(400)
+})
+
+it('return 400 Bad Request on bad email', async () => {
+  return await request(app)
+    .post('/api/v1/user/signup/email')
+    .send({
+      username: 'aswin',
+      email: 'aswinedassery@com',
+      password: 'Aswines@123'
+    })
+    .expect(400)
+})
+
+it('return 400 Bad Request on bad password', async () => {
+  return await request(app)
+    .post('/api/v1/user/signup/email')
+    .send({
+      username: 'aswin',
+      email: 'aswinedassery@gmail.com',
+      password: 'Aswines123'
+    })
+    .expect(400)
+})
+
+it('return 400 Bad Request on bad password,email, and no username', async () => {
+  return await request(app)
+    .post('/api/v1/user/signup/email')
+    .send({
+      username: '',
+      email: 'aswinedassery@com',
+      password: 'Aswines123'
+    })
+    .expect(400)
 })
