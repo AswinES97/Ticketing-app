@@ -6,7 +6,7 @@ import { type UserSignupServiceI } from '../adapters/Interfaces/services/user'
 export type expressType = typeof import('express')
 
 export interface IUserAttr {
-  userId: string
+  userId?: string
   username?: string
   email?: string
   phone?: string
@@ -20,4 +20,11 @@ export interface IUserSignupParmeters {
   userDbCalls: UserSignupDbI
   findUserDBCalls: FindUserI
   serviceCalls: UserSignupServiceI
+}
+
+export interface IUserEntity {
+  userId: () => string | undefined
+  username: () => string | undefined
+  password: () => string | undefined
+  email: () => string | undefined
 }

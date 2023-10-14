@@ -9,8 +9,6 @@ export const userSignupController = (
     userEmailSignup: (arg1: Request, arg2: Response) => Promise<void>
   } => {
   const userEmailSignup = async (req: Request, res: Response): Promise<void> => {
-    // res.send(param.serviceCalls.generateId())
-
     const inputData: IUserAttr = req.body
     const newUser = await emailSignup(inputData, params)
     res.status(201).send(newUser)
