@@ -2,7 +2,7 @@ name: auth-test
 on:
     pull_request: 
         branches: ['main']
-        paths: ["/backend/auth/src/**"]
+        paths: ["backend/auth/src/**"]
 jobs:
     build:
         runs-on: ubuntu-latest
