@@ -14,6 +14,11 @@ spec:
       containers:
       - name: auth
         image: aswines/ticketing-auth
+        # env:
+        #   - name: PORT
+        #     value: "3000"
+        #   - name: MONGO_URL
+        #     value: 'mongodb://auth-mongo-srv:27017/auth'
         resources:
           limits:
             memory: "1280Mi"
