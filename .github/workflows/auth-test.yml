@@ -15,16 +15,15 @@ jobs:
         uses: actions/checkout@v3
           
       - name: Install dependencies
-        run: cd backend/auth && npm install
+        run: |
+          cd backend/auth 
+          npm install
 
       - name: Set Environment Variables
         run: |
           echo PORT=${{ secrets.PORT }} > backend/auth/.env
           echo MONGO_URL=${{ secrets.MONGO_URL }} >> backend/auth/.env
           echo NODE_ENV=${{ secrets.NODE_ENV }} >> backend/auth/.env
-
-      - name: Show Contents of .env File
-        run: cat backend/auth/.env
 
       - name: Running tests
         run: |
