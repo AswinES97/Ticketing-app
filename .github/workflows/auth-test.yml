@@ -25,4 +25,4 @@ jobs:
           cd backend/auth && ls -a
 
       - name: Running tests
-        run: cd backend/auth && npm run test:ci
+        run: cd backend/auth && && ls -a && npm run test:ci
