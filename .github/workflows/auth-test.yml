@@ -20,5 +20,5 @@ jobs:
                 echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
             
             - name: Running tests
-              run: npm run test:ci
+              run: cd backend/auth && npm run test:ci
               
