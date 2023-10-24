@@ -16,9 +16,9 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          echo "PORT=${{ secrets.PORT }}" > backend/auth/.env
-          echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> backend/auth/.env
-          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> backend/auth/.env
+          echo "PORT=${{ secrets.PORT }}" > $GITHUB_WORKSPACE/backend/auth/.env
+          echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> $GITHUB_WORKSPACE/backend/auth/.env
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> $GITHUB_WORKSPACE/backend/auth/.env
           
       - name: Install dependencies
         run: cd backend/auth && npm install
