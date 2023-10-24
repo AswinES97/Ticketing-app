@@ -15,7 +15,7 @@ const startServer = async (): Promise<void> => {
   server.listen(PORT, () => {
     // Only if environment is development
     if (configKeys.NODE_ENV === 'development') {
-      console.log(`auth listening on port - ${PORT}`)
+      console.log(`auth listening on port-${PORT}`)
     }
   })
 }
