@@ -23,7 +23,6 @@ jobs:
           echo MONGO_URL=${{ secrets.MONGO_URL }} >> backend/auth/.env
           echo NODE_ENV=${{ secrets.NODE_ENV }} >> backend/auth/.env
           cd backend/auth && ls -a
-          cat backend/auth/.env
           cd backend/auth && npm run test:ci
 
       # - name: Running tests
