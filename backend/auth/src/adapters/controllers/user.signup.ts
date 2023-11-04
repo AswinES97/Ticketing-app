@@ -1,21 +1,20 @@
 import { type Request, type Response } from 'express'
 import { type IUserSignupParmeters } from '../../types/types'
-// import { type IUserAttr } from '../../types/types'
 
-// import { emailSignup } from '../../application/user-cases/auth/user'
+import { emailSignup } from '../../application/user-cases/auth/user'
 
 export const userSignupController = (
   param: IUserSignupParmeters
 ): {
-    userEmailSignup: (arg1: Request, arg2: Response) => void
+    userEmailSignup: (arg1: Request, arg2: Response) => Promise<void>
   } => {
-  const userEmailSignup = (req: Request, res: Response): void => {
-    res.send(param.serviceCalls.generateId())
+  const userEmailSignup = async (req: Request, res: Response): Promise<void> => {
+    const newUser = await emailSignup(
+      req.body,
+      param
+    )
 
-    // const userData: IUserAttr = req.body
-    // const newUser = await emailSignup(
-    //   userData
-    // )
+    res.status(201).send(newUser)
   }
 
   return {

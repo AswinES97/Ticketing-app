@@ -41,10 +41,14 @@ const userSchema = new mongoose.Schema({
     default: false
   },
   isPhoneVerified: {
-    type: Boolean
+    type: Boolean,
+    required: true,
+    default: false
   },
   isEmailVerified: {
-    type: Boolean
+    type: Boolean,
+    required: true,
+    default: false
   }
 }, {
   timestamps: true,
@@ -52,7 +56,7 @@ const userSchema = new mongoose.Schema({
   toJSON: {
     transform (doc, ret) {
       delete ret._id
-      delete ret._v
+      delete ret.__v
       delete ret.password
     }
   }

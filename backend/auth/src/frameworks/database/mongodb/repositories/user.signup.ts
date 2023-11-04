@@ -2,7 +2,7 @@ import { type IUserDoc, UserModel } from '../model/user'
 
 import { type IUserAttr } from '../../../../types/types'
 
-export class UserSignupDbImpl {
+export class UserSignupEmail {
   async email (userData: IUserAttr): Promise<IUserDoc> {
     const user = new UserModel({
       userId: userData.userId,
@@ -15,4 +15,8 @@ export class UserSignupDbImpl {
   }
 }
 
-export type UserSignupImplType = typeof UserSignupDbImpl
+export class UserCheckEmail {
+  async checkEmail (email: string): Promise<IUserDoc | null> {
+    return await UserModel.findOne({ email })
+  }
+}
