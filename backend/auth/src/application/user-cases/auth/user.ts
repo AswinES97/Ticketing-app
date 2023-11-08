@@ -1,4 +1,6 @@
 import { BadRequestError } from '@ticket-common/common'
+import { user } from '../../../entities/user'
+
 import { type IUserDoc } from '../../../frameworks/database/mongodb/model/user'
 import { type IUserSignupParmeters, type IUserAttr } from '../../../types/types'
 
@@ -8,5 +10,21 @@ export const emailSignup = async (userData: IUserAttr, userSignup: IUserSignupPa
   if (hasEmail !== null) throw new BadRequestError('Email Already Exist')
 
   userData.userId = userSignup.serviceCalls.generateId()
-  return await userSignup.userDbCalls.emailSignup(userData)
+  userData.password = await userSignup.serviceCalls.hashPass(userData.password as string)
+
+  const newUser = user(userData)
+  const token = userSignup.serviceCalls.generateToken(newUser.userId())
+
+  await userSignup.serviceCalls.sentMail(userData.email as string, token)
+  return await userSignup.userDbCalls.email(newUser)
+}
+
+export const emailVerify = async (token: string | undefined, userSignup: IUserSignupParmeters): Promise<boolean> => {
+  if (token === undefined) throw new Error('token undefined')
+
+  const userId = userSignup.serviceCalls.verifyToken(token)
+  const isUpdate = await userSignup.userDbCalls.verifiedEmail(userId as string)
+
+  if (isUpdate === null) return false
+  return true
 }

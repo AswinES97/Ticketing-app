@@ -1,12 +1,11 @@
-import { type FindUserI } from '../adapters/Interfaces/repositories/userFindDBImpl'
-import { type UserSignupDbI } from '../adapters/Interfaces/repositories/userSignupDBInterface'
+import { type UserSignupDbInterface } from '../adapters/Interfaces/repositories/userSignupDBInterface'
 import { type UserSignupServiceI } from '../adapters/Interfaces/services/user'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 export type expressType = typeof import('express')
 
 export interface IUserAttr {
-  userId?: string
+  userId: string
   username?: string
   email?: string
   phone?: string
@@ -16,15 +15,20 @@ export interface IUserAttr {
   isEmailVerified?: boolean
 }
 
+// Interface for controller parameters/argument objects
 export interface IUserSignupParmeters {
-  userDbCalls: UserSignupDbI
-  findUserDBCalls: FindUserI
+  userDbCalls: UserSignupDbInterface
   serviceCalls: UserSignupServiceI
 }
 
+// User Entity
 export interface IUserEntity {
-  userId: () => string | undefined
+  userId: () => string
   username: () => string | undefined
   password: () => string | undefined
   email: () => string | undefined
+  phone: () => string | undefined
+  isBlocked: () => boolean | undefined
+  isPhoneVerified: () => boolean | undefined
+  isEmailVerified: () => boolean | undefined
 }

@@ -5,6 +5,10 @@ export const user = (data: IUserAttr): IUserEntity => {
     userId: () => data.userId,
     username: () => data.username,
     email: () => data.email,
-    password: () => data.password
+    password: () => data.password,
+    phone: () => data.phone,
+    isBlocked: () => data.isblocked,
+    isPhoneVerified: () => data.isEmailVerified,
+    isEmailVerified: () => data.isEmailVerified
   }
 }
