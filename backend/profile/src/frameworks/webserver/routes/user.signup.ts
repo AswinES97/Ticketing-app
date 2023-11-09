@@ -9,15 +9,13 @@ import { UserSignupDbInterface } from '../../../adapters/Interfaces/repositories
 import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user'
 
 import reqValidator from '../middleware/reqValidator'
-import ProducerFactory from '../../queue/kafka'
 
 export const userSignupRouter = (express: expressType): Router => {
   const router = express.Router()
 
   const controller = userSignupController({
     userDbCalls: new UserSignupDbInterface(),
-    serviceCalls: new UserSignupServiceI(),
-    kafkaCalls: new ProducerFactory()
+    serviceCalls: new UserSignupServiceI()
   })
 
   router.post('/email',
