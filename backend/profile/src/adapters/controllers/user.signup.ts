@@ -1,6 +1,6 @@
-import { emailSignup, emailVerify } from '../../application/user-cases/auth/user'
-
 import { type Request, type Response } from 'express'
+
+import { emailSignup, emailVerify } from '../../application/user-cases/auth/user'
 import { type IUserSignupParmeters } from '../../types/types'
 
 export const userSignupController = (
