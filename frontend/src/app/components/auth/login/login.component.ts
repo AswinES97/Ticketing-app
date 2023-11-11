@@ -25,17 +25,20 @@ export class LoginComponent {
   }
 
   mailErrorCondition(){
-    return this.getEmail()?.touched && this.getEmail()?.invalid && this.getEmail()?.value !==''
+    return this.getEmail()?.touched && this.getEmail()?.invalid 
   }
 
   passwordErrorCondition(){
-    return this.getPassword()?.touched && this.getPassword()?.invalid && this.getPassword()?.value !==''
+    return this.getPassword()?.touched && this.getPassword()?.invalid 
   }
 
   onSubmit() {
     console.log(this.loginForm.value);
     if(this.loginForm.valid){
-      this.authService.login(this.loginForm.value)
+      this.authService.login(this.loginForm.value).subscribe()
+    }else{
+      this.loginForm.markAllAsTouched()
+      this.loginForm.markAsDirty()
     }
   }
 }
