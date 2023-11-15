@@ -1,6 +1,6 @@
+import { type KafkaInterface } from '../adapters/Interfaces/queue/kafka'
 import { type UserSignupDbInterface } from '../adapters/Interfaces/repositories/userSignupDBInterface'
 import { type UserSignupServiceI } from '../adapters/Interfaces/services/user'
-import type ProducerFactory from '../frameworks/queue/kafka'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 export type expressType = typeof import('express')
@@ -20,7 +20,7 @@ export interface IUserAttr {
 export interface IUserSignupParmeters {
   userDbCalls: UserSignupDbInterface
   serviceCalls: UserSignupServiceI
-  kafkaCalls: ProducerFactory
+  kafkaCalls: KafkaInterface
 }
 
 // User Entity
@@ -33,4 +33,10 @@ export interface IUserEntity {
   isBlocked: () => boolean | undefined
   isPhoneVerified: () => boolean | undefined
   isEmailVerified: () => boolean | undefined
+}
+
+// kafka interface
+export interface IKafka {
+  newtopic: (arg1: string) => Promise<void>
+  produce: (arg1: IUserAttr) => Promise<void>
 }

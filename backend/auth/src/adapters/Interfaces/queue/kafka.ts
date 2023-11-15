@@ -1,14 +1,17 @@
-import ProducerFactory from '../../../frameworks/queue/kafka'
-// import { type IUserAttr } from '../../../types/types'
+import { KafkaAdmin } from '../../../frameworks/queue/kafka/admin'
+import ProducerFactory from '../../../frameworks/queue/kafka/producer'
 
-export class KafkaInterface {
-  private readonly kafkaProducer: ProducerFactory
+import { type IUserAttr, type IKafka } from '../../../types/types'
 
-  constructor () {
-    this.kafkaProducer = new ProducerFactory()
+export class KafkaInterface implements IKafka {
+  private readonly kafkaAdmin = new KafkaAdmin()
+  private readonly kafkaProducer = new ProducerFactory()
+
+  async newtopic (topic: string): Promise<void> {
+    await this.kafkaAdmin.createTopic(topic)
   }
 
-  async send (message: string): Promise<void> {
-    await this.kafkaProducer.send(message)
+  async produce (userata: IUserAttr): Promise<void> {
+    await this.kafkaProducer.send(userata)
   }
 }

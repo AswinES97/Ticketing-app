@@ -12,10 +12,10 @@ export const emailSignup = async (userData: IUserAttr, userSignup: IUserSignupPa
   userData.userId = userSignup.serviceCalls.generateId()
   userData.password = await userSignup.serviceCalls.hashPass(userData.password as string)
 
-  // await userSignup.kafkaCalls.start()
-  // await userSignup.kafkaCalls.send('hello')
-
+  await userSignup.kafkaCalls.newtopic('New-User')
+  await userSignup.kafkaCalls.produce(userData)
   const newUser = user(userData)
+
   const token = userSignup.serviceCalls.generateToken(newUser.userId())
 
   await userSignup.serviceCalls.sentMail(userData.email as string, token)
