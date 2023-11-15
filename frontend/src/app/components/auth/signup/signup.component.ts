@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorHandlerService } from 'src/app/services/error-haandler.service';
+import { catchError, pipe, retry } from "rxjs"
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +12,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent {
   signupForm : FormGroup
 
-  constructor(private formbuilder: FormBuilder, private authService: AuthService){
+  constructor(
+    private formbuilder: FormBuilder, 
+    private authService: AuthService,
+    private errors: ErrorHandlerService
+    ){
     this.signupForm = this.formbuilder.group({
       username:['',[Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
       email:['',[Validators.required, Validators.email]],
@@ -53,15 +59,16 @@ export class SignupComponent {
 
   onSubmit(){
     if(this.signupForm.valid){
-      console.log(this.signupForm.value);
-      
+      this.authService.signup(this.signupForm.value)
+        .pipe(
+          retry(3),
+          catchError(err=> this.errors.handleError(err))
+        )
+        .subscribe(data => console.log(data)
+        )
     }else{
       this.signupForm.markAllAsTouched()
       this.signupForm.markAsDirty()
     }
-    // this.authService.signup(this.signupForm.value).subscribe({
-    //   next: data=> console.log(data),
-    //   error: err=>console.log(err)
-    // })
   }
 }
