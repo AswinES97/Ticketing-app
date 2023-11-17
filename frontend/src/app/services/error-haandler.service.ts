@@ -9,14 +9,14 @@ import { throwError } from 'rxjs';
 export class ErrorHandlerService {
 
   constructor(
-    private toast: ToastrService,
+    
   ) { }
 
-  handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse, toster: ToastrService) {
     if(error.status.toString().startsWith('4'))
-      this.toast.error(error.error.error[0].message)
+      toster.error(error.error.error[0].message)
     else
-      this.toast.error('Something went Wrong')
+      toster.error('Something went Wrong')
     
     return throwError(() => new Error('Something bad happened; please try again later.')); 
   }

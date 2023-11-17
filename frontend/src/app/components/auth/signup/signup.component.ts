@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorHandlerService } from 'src/app/services/error-haandler.service';
 import { catchError, pipe, retry } from "rxjs"
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -11,11 +13,14 @@ import { catchError, pipe, retry } from "rxjs"
 })
 export class SignupComponent {
   signupForm : FormGroup
+  submitted: boolean = false
 
   constructor(
     private formbuilder: FormBuilder, 
     private authService: AuthService,
-    private errors: ErrorHandlerService
+    private errors: ErrorHandlerService,
+    private toaster: ToastrService,
+    private router: Router
     ){
     this.signupForm = this.formbuilder.group({
       username:['',[Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
@@ -59,14 +64,22 @@ export class SignupComponent {
 
   onSubmit(){
     if(this.signupForm.valid){
+      this.submitted = true
       this.authService.signup(this.signupForm.value)
         .pipe(
-          retry(3),
-          catchError(err=> this.errors.handleError(err))
+          catchError(err=> {
+            this.submitted = false
+            return this.errors.handleError(err,this.toaster)}
+            )
         )
-        .subscribe(data => console.log(data)
-        )
+        .subscribe(data =>{
+          this.toaster.success('User Created')
+          setTimeout(()=>{
+            this.router.navigate(['/','email-sent'])
+          },1000)
+        })
     }else{
+      this.submitted = false
       this.signupForm.markAllAsTouched()
       this.signupForm.markAsDirty()
     }

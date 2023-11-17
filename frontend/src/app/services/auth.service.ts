@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private _http: HttpClient) { }
 
   login(data: ILogin) {
-    return this._http.post('http://localhost:3000/api/v1/auth/user/login', data)
+    return this._http.post(`http://localhost:3000/api/v1/auth/user/signin/email`, data)
   }
 
   signup(data: ISignup){

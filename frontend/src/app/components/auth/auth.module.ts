@@ -8,12 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EmailSentComponent } from './email-sent/email-sent.component';
 
 
 @NgModule({
   declarations: [
     SignupComponent,
     LoginComponent,
+    EmailSentComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     SignupComponent,
-    AuthRoutingModule
+    AuthRoutingModule,
+    EmailSentComponent
   ]
 })
 export class AuthModule { }

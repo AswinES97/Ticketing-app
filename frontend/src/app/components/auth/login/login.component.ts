@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, retry } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorHandlerService } from 'src/app/services/error-haandler.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +14,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  isDisabled: boolean = false
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private toaster: ToastrService,
+    private errorhandler: ErrorHandlerService,
+    private router: Router
+    ) { }
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -33,12 +45,31 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
-    if(this.loginForm.valid){
-      this.authService.login(this.loginForm.value).subscribe()
+    if(this.loginForm.valid){      
+      this.isDisabled = true
+      this.authService.login(this.loginForm.value)
+      .pipe(
+        retry(3),
+        catchError(err=>{
+          this.isDisabled = false
+          return this.errorhandler.handleError(err,this.toaster)
+        })
+      )
+      .subscribe(data=>{
+        const response = data as responseData
+        const payload = jwtDecode(response.token)
+        
+        localStorage.setItem('token', response.token)
+        this.router.navigate(['/'])
+    })
     }else{
+      this.isDisabled = false
       this.loginForm.markAllAsTouched()
       this.loginForm.markAsDirty()
     }
   }
+}
+
+type responseData = {
+  token: string
 }

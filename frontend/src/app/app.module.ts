@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
+import { StoreModule } from '@ngrx/store';
+import { HomeModule } from './components/home/home.module';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    HomeModule,
+    ToastrModule.forRoot(),
+    StoreModule.forRoot({}, {})
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
