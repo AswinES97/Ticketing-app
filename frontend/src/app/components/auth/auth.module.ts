@@ -4,18 +4,30 @@ import { CommonModule } from '@angular/common';
 import { SignupComponent } from './signup/signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { EmailSentComponent } from './email-sent/email-sent.component';
+
 
 @NgModule({
   declarations: [
     SignupComponent,
+    LoginComponent,
+    EmailSentComponent,
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     SignupComponent,
-    AuthRoutingModule
+    AuthRoutingModule,
+    EmailSentComponent
   ]
 })
 export class AuthModule { }
