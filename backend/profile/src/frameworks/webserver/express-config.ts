@@ -1,7 +1,6 @@
 import type { Application } from 'express'
 import type { expressType } from '../../types/types'
 import type { thirdPartyMiddlewareType } from './server'
-import cors from 'cors'
 import configKeys from '../../config/config'
 
 const serverConfig = (
@@ -13,7 +12,7 @@ const serverConfig = (
   if (configKeys.NODE_ENV === 'development') {
     app.use(middleware.morgan('dev'))
   }
-  app.use(cors())
+  app.use(middleware.cors())
   app.use(middleware.compression())
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))

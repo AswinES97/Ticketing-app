@@ -5,8 +5,9 @@ import compression from 'compression'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import mongoSanitize from 'express-mongo-sanitize'
-import 'express-async-errors'
+import cors from 'cors'
 
+import 'express-async-errors'
 import { errorHandlingMiddleware } from '@ticket-common/common'
 
 import { serverConfig } from './express-config'
@@ -14,6 +15,7 @@ import router from './routes'
 
 // for passing as argument
 const thirdPartyMiddleware = {
+  cors,
   helmet,
   compression,
   morgan,

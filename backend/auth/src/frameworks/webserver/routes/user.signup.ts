@@ -6,10 +6,10 @@ import { type expressType } from '../../../types/types'
 import { userSignupController } from '../../../adapters/controllers/user.signup'
 
 import { UserSignupDbInterface } from '../../../adapters/Interfaces/repositories/userSignupDBInterface'
-import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user'
+import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user.signup'
 
 import reqValidator from '../middleware/reqValidator'
-import ProducerFactory from '../../queue/kafka'
+import { KafkaInterface } from '../../../adapters/Interfaces/queue/kafka'
 
 export const userSignupRouter = (express: expressType): Router => {
   const router = express.Router()
@@ -17,7 +17,7 @@ export const userSignupRouter = (express: expressType): Router => {
   const controller = userSignupController({
     userDbCalls: new UserSignupDbInterface(),
     serviceCalls: new UserSignupServiceI(),
-    kafkaCalls: new ProducerFactory()
+    kafkaCalls: new KafkaInterface()
   })
 
   router.post('/email',

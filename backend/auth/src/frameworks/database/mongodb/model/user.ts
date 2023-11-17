@@ -13,7 +13,8 @@ export interface IUserDoc extends mongoose.Document {
   username?: string
   email?: string
   phone?: string
-  isBlocked: boolean
+  password?: string
+  isBlocked?: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
 }
@@ -58,6 +59,11 @@ const userSchema = new mongoose.Schema({
       delete ret._id
       delete ret.__v
       delete ret.password
+      delete ret.isBlocked
+      delete ret.isPhoneVerified
+      delete ret.isEmailVerified
+      delete ret.createdAt
+      delete ret.updatedAt
     }
   }
 })

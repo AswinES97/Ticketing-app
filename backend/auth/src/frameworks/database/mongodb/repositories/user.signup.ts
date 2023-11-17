@@ -15,12 +15,6 @@ export class UserSignupEmail {
   }
 }
 
-export class UserCheckEmail {
-  async doesEmailExist (email: string): Promise<IUserDoc | null> {
-    return await UserModel.findOne({ email })
-  }
-}
-
 export class Verified {
   async email (userId: string): Promise<IUserDoc | null> {
     return await UserModel.findOneAndUpdate({ userId }, { $set: { isEmailVerified: true } }, { returnNewDocument: true })
@@ -28,7 +22,7 @@ export class Verified {
 }
 
 export interface IUserDBCalls {
-  email: (arg1: IUserEntity) => Promise<IUserDoc>
+  emailSignup: (arg1: IUserEntity) => Promise<IUserDoc>
   doesEmailExist: (arg1: string) => Promise<IUserDoc | null>
   verifiedEmail: (arg1: string) => Promise<IUserDoc | null>
 }
