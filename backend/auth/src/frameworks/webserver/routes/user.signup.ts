@@ -6,7 +6,7 @@ import { type expressType } from '../../../types/types'
 import { userSignupController } from '../../../adapters/controllers/user.signup'
 
 import { UserSignupDbInterface } from '../../../adapters/Interfaces/repositories/userSignupDBInterface'
-import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user'
+import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user.signup'
 
 import reqValidator from '../middleware/reqValidator'
 import { KafkaInterface } from '../../../adapters/Interfaces/queue/kafka'

@@ -1,6 +1,8 @@
 import { type KafkaInterface } from '../adapters/Interfaces/queue/kafka'
+import { type UserLoginDBInterface } from '../adapters/Interfaces/repositories/userLoginDBInterface'
 import { type UserSignupDbInterface } from '../adapters/Interfaces/repositories/userSignupDBInterface'
-import { type UserSignupServiceI } from '../adapters/Interfaces/services/user'
+import { type UserLoginServiceI } from '../adapters/Interfaces/services/user.login'
+import { type UserSignupServiceI } from '../adapters/Interfaces/services/user.signup'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 export type expressType = typeof import('express')
@@ -11,16 +13,22 @@ export interface IUserAttr {
   email?: string
   phone?: string
   password?: string
-  isblocked: boolean
+  isblocked?: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
 }
 
-// Interface for controller parameters/argument objects
+// Interface for signup controller parameters/argument objects
 export interface IUserSignupParmeters {
   userDbCalls: UserSignupDbInterface
   serviceCalls: UserSignupServiceI
   kafkaCalls: KafkaInterface
+}
+
+// interface for login controller
+export interface IUserLoginParams {
+  userDbCalls: UserLoginDBInterface
+  serviceCalls: UserLoginServiceI
 }
 
 // User Entity

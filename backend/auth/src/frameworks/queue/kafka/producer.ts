@@ -1,4 +1,4 @@
-import { type Kafka, type Producer } from 'kafkajs'
+import { Partitioners, type Kafka, type Producer } from 'kafkajs'
 import { KafkaProduceClient } from './kafka'
 import { type IUserAttr } from '../../../types/types'
 
@@ -37,6 +37,8 @@ export default class ProducerFactory {
   }
 
   private createProducer (kafka: Kafka): Producer {
-    return kafka.producer()
+    return kafka.producer({
+      createPartitioner: Partitioners.LegacyPartitioner
+    })
   }
 }

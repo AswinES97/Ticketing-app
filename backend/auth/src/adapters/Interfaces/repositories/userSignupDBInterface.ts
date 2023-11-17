@@ -1,5 +1,6 @@
 import { type IUserDoc } from '../../../frameworks/database/mongodb/model/user'
-import { type IUserDBCalls, UserCheckEmail, UserSignupEmail, Verified } from '../../../frameworks/database/mongodb/repositories/user.signup'
+import { UserCheckEmail } from '../../../frameworks/database/mongodb/repositories/user.common'
+import { type IUserDBCalls, UserSignupEmail, Verified } from '../../../frameworks/database/mongodb/repositories/user.signup'
 import { type IUserEntity } from '../../../types/types'
 
 export class UserSignupDbInterface implements IUserDBCalls {
@@ -13,7 +14,7 @@ export class UserSignupDbInterface implements IUserDBCalls {
     this.updateVerifid = new Verified()
   }
 
-  async email (userData: IUserEntity): Promise<IUserDoc> {
+  async emailSignup (userData: IUserEntity): Promise<IUserDoc> {
     return await this.signupEmail.email(userData)
   }
 

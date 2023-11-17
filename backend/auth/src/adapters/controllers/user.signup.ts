@@ -11,7 +11,7 @@ export const userSignupController = (
   } => {
   const userEmailSignup = async (req: Request, res: Response): Promise<void> => {
     await emailSignup(req.body, params)
-    res.status(400).send({ status: 'user created' })
+    res.status(201).send({ status: 'user created' })
   }
 
   const userEmailVerify = async (req: Request, res: Response): Promise<void> => {

@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer'
 
 import { v4 as uuidv4 } from 'uuid'
 import configKeys from '../../config/config'
+import { type IUserAttr } from '../../types/types'
 
 const scryptAsync = promisify(scrypt)
 
@@ -12,7 +13,7 @@ export class Password {
   async hash (password: string): Promise<string> {
     const salt = randomBytes(8).toString('hex')
     const buf = (await scryptAsync(password, salt, 64)) as Buffer
-    return `${buf.toString('hex')}.${salt}}`
+    return `${buf.toString('hex')}.${salt}`
   }
 
   async compare (storedPassword: string, suppliedPassword: string): Promise<boolean> {
@@ -63,6 +64,42 @@ export class Mailer {
       subject: 'Ticketing Verification', // Subject line
       text: `Please verify your email by clicking ${configKeys.BASE_URL}/signup/verify-email/${token}` // plain text body
     })
+  }
+}
+
+export class JwtHsaRsa {
+  accessToken (data: IUserAttr): string {
+    return jwt.sign(
+      {
+        data,
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 15, // 15 days expiration
+        iat: Math.floor(Date.now() / 1000)
+      },
+      configKeys.JWT_PRIVATE_KEY,
+      { algorithm: 'RS256' }
+    )
+  }
+
+  generateRefreshToken (data: IUserAttr, role: string): string {
+    return jwt.sign(
+      {
+        data,
+        role: [role],
+        exp: Math.floor(Date.now() / 1000) + 60 * 15, // 15 minutes expiration
+        iat: Math.floor(Date.now() / 1000)
+      },
+      configKeys.JWT_PRIVATE_KEY,
+      { algorithm: 'RS256' }
+    )
+  }
+
+  verify (token: string): JwtPayload | string | undefined {
+    try {
+      return jwt.verify(token, configKeys.JWT_PUBLIC_KEY)
+    } catch (err) {
+      // todo jwt expired error
+      console.log('token expired')
+    }
   }
 }
 
