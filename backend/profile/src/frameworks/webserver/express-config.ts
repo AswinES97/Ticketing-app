@@ -1,26 +1,30 @@
 import type { Application } from 'express'
 import type { expressType } from '../../types/types'
-import type { thirdPartyMiddlewareType } from './server'
+import helmet from 'helmet'
+import compression from 'compression'
+import morgan from 'morgan'
+import cookieParser from 'cookie-parser'
+import mongoSanitize from 'express-mongo-sanitize'
+import cors from 'cors'
 import configKeys from '../../config/config'
 
 const serverConfig = (
   app: Application,
-  express: expressType,
-  middleware: thirdPartyMiddlewareType
+  express: expressType
 ): void => {
   // logging
   if (configKeys.NODE_ENV === 'development') {
-    app.use(middleware.morgan('dev'))
+    app.use(morgan('dev'))
   }
-  app.use(middleware.cors())
-  app.use(middleware.compression())
+  app.use(cors())
+  app.use(compression())
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-  app.use(middleware.cookieParser())
-  app.use(middleware.mongoSanitize({
+  app.use(cookieParser())
+  app.use(mongoSanitize({
     allowDots: true
   }))
-  app.use(middleware.helmet({ xssFilter: true }))
+  app.use(helmet({ xssFilter: true }))
 }
 
 export { serverConfig }

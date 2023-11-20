@@ -49,7 +49,17 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  dob: {
+    type: Date
+  },
+  gender: {
+    type: String
+  },
+  img: {
+    type: [String]
   }
+
 }, {
   timestamps: true,
   // to delete _id, _v, password from return document
