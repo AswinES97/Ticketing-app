@@ -1,7 +1,6 @@
-import 'express-async-errors'
-
 import { type Router } from 'express'
 import { type expressType } from '../../../types/types'
+import { KafkaInterface } from '../../../adapters/Interfaces/queue/kafka'
 
 import { userSignupController } from '../../../adapters/controllers/user.signup'
 
@@ -9,7 +8,6 @@ import { UserSignupDbInterface } from '../../../adapters/Interfaces/repositories
 import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user.signup'
 
 import reqValidator from '../middleware/reqValidator'
-import { KafkaInterface } from '../../../adapters/Interfaces/queue/kafka'
 
 export const userSignupRouter = (express: expressType): Router => {
   const router = express.Router()

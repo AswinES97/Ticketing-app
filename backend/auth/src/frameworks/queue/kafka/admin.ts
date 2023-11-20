@@ -1,5 +1,6 @@
 import { KafkaProduceClient } from './kafka'
 import { type Admin } from 'kafkajs'
+import { topics } from './topics'
 
 export class KafkaAdmin {
   private readonly kafkaConfig = new KafkaProduceClient()
@@ -10,13 +11,10 @@ export class KafkaAdmin {
     return admin
   }
 
-  async createTopic (topic: string): Promise<void> {
+  async createTopic (): Promise<void> {
     const admin = await this.connectAdmin()
     await admin.createTopics({
-      topics: [{
-        topic,
-        numPartitions: 2
-      }]
+      topics
     })
     await admin.disconnect()
   }

@@ -1,12 +1,14 @@
+import { type IUserAttr } from '../../../types/types'
+
 import { Partitioners, type Kafka, type Producer } from 'kafkajs'
 import { KafkaProduceClient } from './kafka'
-import { type IUserAttr } from '../../../types/types'
 
 export default class ProducerFactory {
   private readonly producer: Producer
-  private readonly kafkaConfig = new KafkaProduceClient()
+  private readonly kafkaConfig: KafkaProduceClient
 
   constructor () {
+    this.kafkaConfig = new KafkaProduceClient()
     this.producer = this.createProducer(this.kafkaConfig.getClient())
   }
 
@@ -22,16 +24,16 @@ export default class ProducerFactory {
     await this.producer.disconnect()
   }
 
-  public async send (userData: IUserAttr): Promise<void> {
+  public async send (data: IUserAttr | string, key: string): Promise<void> {
     await this.start()
 
-    const topic = {
-      topic: 'New-User',
+    await this.producer.send({
+      topic: 'Auth-Service',
       messages: [{
-        value: JSON.stringify(userData)
+        key,
+        value: JSON.stringify(data)
       }]
-    }
-    await this.producer.send(topic)
+    })
 
     await this.shutdown()
   }

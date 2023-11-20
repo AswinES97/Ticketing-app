@@ -45,6 +45,6 @@ export interface IUserEntity {
 
 // kafka interface
 export interface IKafka {
-  newtopic: (arg1: string) => Promise<void>
-  produce: (arg1: IUserAttr) => Promise<void>
+  // newtopic: (arg1: string) => Promise<void>
+  produce: (arg1: IUserAttr, agr2: string) => Promise<void>
 }

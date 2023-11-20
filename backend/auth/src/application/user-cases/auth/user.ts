@@ -15,8 +15,8 @@ export const emailSignup = async (userData: IUserAttr, userSignup: IUserSignupPa
 
   await userSignup.userDbCalls.emailSignup(newUser)
 
-  await userSignup.kafkaCalls.newtopic('New-User')
-  await userSignup.kafkaCalls.produce(userData)
+  const keys = userSignup.kafkaCalls.getKeys().newUser
+  await userSignup.kafkaCalls.produce(userData, keys)
 
   const token = userSignup.serviceCalls.generateToken(newUser.userId())
   await userSignup.serviceCalls.sentMail(userData.email as string, token)
@@ -29,5 +29,9 @@ export const emailVerify = async (token: string | undefined, userSignup: IUserSi
   const isUpdate = await userSignup.userDbCalls.verifiedEmail(userId as string)
 
   if (isUpdate === null) return false
+
+  const keys = userSignup.kafkaCalls.getKeys().emailVerified
+  await userSignup.kafkaCalls.produce(isUpdate.userId, keys)
+
   return true
 }

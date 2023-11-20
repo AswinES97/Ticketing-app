@@ -1,6 +1,6 @@
 import { Kafka } from 'kafkajs'
 
-export class KafkaProduceClient {
+export class KafkaClient {
   getClient (): Kafka {
     const kafka = new Kafka({
       clientId: 'producer-client',
