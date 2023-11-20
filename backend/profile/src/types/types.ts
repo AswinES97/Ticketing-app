@@ -1,6 +1,8 @@
 import { type KafkaConsumerInterface } from '../adapters/Interfaces/queue/kafkaConsumer'
 import { type KafkaMongDbInterface } from '../adapters/Interfaces/repositories/kafkaDbInterface'
+import { type UserProfile } from '../adapters/Interfaces/repositories/profile'
 import { type kafakEntitiesType } from '../entities/user'
+import { type IUserDoc } from '../frameworks/database/mongodb/model/user'
 import { type consumerKeys } from '../frameworks/queue/kafka/topics'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
@@ -50,4 +52,12 @@ export interface kafkaParams {
   kafaCalls: KafkaConsumerInterface
   kakfaMongDbCalls: KafkaMongDbInterface
   consumerKeys: consumerKeys
+}
+
+export interface IProfileDbRepositary {
+  porfileData: (arg1: string) => Promise<IUserDoc | null>
+}
+
+export interface IProfileControllerParams {
+  userDbCalls: UserProfile
 }

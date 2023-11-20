@@ -6,19 +6,19 @@ import { type IUserSignupParmeters } from '../../types/types'
 export const userSignupController = (
   params: IUserSignupParmeters
 ): {
-    userEmailSignup: (arg1: Request, arg2: Response) => Promise<void>
-    userEmailVerify: (arg1: Request, arg2: Response) => Promise<void>
+    userEmailSignup: (arg1: Request, arg2: Response) => Promise<Response>
+    userEmailVerify: (arg1: Request, arg2: Response) => Promise<Response>
   } => {
-  const userEmailSignup = async (req: Request, res: Response): Promise<void> => {
+  const userEmailSignup = async (req: Request, res: Response): Promise<Response> => {
     await emailSignup(req.body, params)
-    res.status(201).send({ status: 'user created' })
+    return res.status(201).send({ status: 'user created' })
   }
 
-  const userEmailVerify = async (req: Request, res: Response): Promise<void> => {
+  const userEmailVerify = async (req: Request, res: Response): Promise<Response> => {
     const isEmailVerified = await emailVerify(req.params.token, params)
 
-    if (isEmailVerified) res.status(200).send('email verified')
-    else res.status(400).send('unable to verify')
+    if (isEmailVerified) return res.status(200).send('email verified')
+    return res.status(400).send('unable to verify')
   }
 
   return {

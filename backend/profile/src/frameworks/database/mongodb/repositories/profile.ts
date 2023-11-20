@@ -24,3 +24,9 @@ export class Verify {
     return await UserModel.findOneAndUpdate({ userId }, { $set: { isEmailVerified: true } }, { returnNewDocument: true })
   }
 }
+
+export class UserInfo {
+  async get (userId: string): Promise<IUserDoc | null> {
+    return await UserModel.findOne({ userId })
+  }
+}

@@ -68,6 +68,7 @@ const userSchema = new mongoose.Schema({
       delete ret._id
       delete ret.__v
       delete ret.password
+      delete ret.updatedAt
     }
   }
 })
