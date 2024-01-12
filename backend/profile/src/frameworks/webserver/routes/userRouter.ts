@@ -12,6 +12,7 @@ export const userProfileRouter = (express: expressType): Router => {
   })
 
   router.get('/:userId', controller.getUserProfileData)
+  router.patch('/username/:userId', controller.updateUsername)
 
   return router
 }

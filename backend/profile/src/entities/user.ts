@@ -7,7 +7,7 @@ const user = (data: IUserAttr): IUserEntity => {
     email: () => data.email,
     password: () => data.password,
     phone: () => data.phone,
-    isBlocked: () => data.isblocked,
+    isBlocked: () => data.isBlocked,
     isPhoneVerified: () => data.isEmailVerified,
     isEmailVerified: () => data.isEmailVerified,
     dob: () => data.dob,

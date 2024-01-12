@@ -1,9 +1,8 @@
 import { type Router } from 'express'
 import { type expressType } from '../../../types/types'
 
-import { userLoginController } from '../../../adapters/controllers/user.login'
+import { userLoginController } from '../../../adapters/controllers/user.signin'
 import { UserLoginDBInterface } from '../../../adapters/Interfaces/repositories/userLoginDBInterface'
-import reqValidator from '../middleware/reqValidator'
 import { UserLoginServiceI } from '../../../adapters/Interfaces/services/user.login'
 
 export const userLoginRouter = (express: expressType): Router => {
@@ -14,12 +13,7 @@ export const userLoginRouter = (express: expressType): Router => {
     serviceCalls: new UserLoginServiceI()
   })
 
-  router.post('/email', [
-    reqValidator.emailValidator(),
-    reqValidator.passwordValidator(),
-    reqValidator.validatorFn
-  ],
-  controller.userEmailLogin)
+  router.post('/email', controller.userEmailLogin)
 
   return router
 }

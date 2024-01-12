@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-depl
+spec:
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: aswines/ticketing-apigateway
+        envFrom:
+          - configMapRef:
+              name: apigateway-config
+        resources:
+          limits:
+            memory: "1280Mi"
+            cpu: "500m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway-srv
+spec:
+  selector:
+    app: apigateway
+  ports:
+  - port: 3000
+    targetPort: 3000
+
+

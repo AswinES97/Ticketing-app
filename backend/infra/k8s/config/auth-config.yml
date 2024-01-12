@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+  namespace: default
+data:
+  PORT: "3000"
+  NODE_ENV: "development"
+  MONGO_URL: "mongodb+srv://aswines:v6uS5bFTt3TRdq93@cluster0.4tas68l.mongodb.net/?retryWrites=true&w=majority"
+  JWT_SECRET: 'sz4kUoKTEpemjr6E29kMzCmC3BzAQ6Yfi2UyWjHKSGhAPdGgH2WfcoTZUBWD3uF'
+  NODE_MAILER_PASS: 'ejynttiummehyfnm'
+  BASE_URL: 'http://localhost:3000/api/v1/auth/user'
+  MAIL_URL: 'http://localhost:4200/email-verification'
+  JWT_PRIVATE_KEY: | 
+                -----BEGIN RSA PRIVATE KEY-----
+                MIIEpAIBAAKCAQEAkI6jTynXffD8Vo8N+YpX6kWHT+katorxs1N9RP5YK/cPaBCK
+                xrFESuywC0VHRvtOqLMtlzXgxQePeLBoLV4QMVzV324ObqHfgzf4pLnFYw7BIW7G
+                wSixSE+yZIKttCcSKn/MJrTF3TVWRJ1nZ+ei+k9bssppVNeRh5GdHwmt4S5lWahN
+                4KbbO4Vrz62q2b4JReHFrTpou0JWDsmvkeAvbkv806S6cbSTO/L2JJ4c2i5NBCX1
+                erG0a764iFAW+AYqgalJfg9QUbtUoNdkl0bJlmQ/4DFBBGrCMuMOhxLHmNXHyxs9
+                8y4NGvHMy5hDuB6sjuri0nwPrYHfaIqyX2BAgwIDAQABAoIBABPLVFVst1NJgmQf
+                5pv685ritmqc0smYMQyLLCYcZdpvVC69xSL79wwDaP/CFsaDdvvmvSFtgT+5j03J
+                ahp8PN9lhOu5WESR6dc//M4hmgO8a3m2f4THm675KsZUlpCKoRQst7m9GzL1MMDo
+                hNZXg5ue7kGHMfEqK4VSzR8I5kRlLieFr8fwEgISkelQ/47gVAq5a+MVdlgZvJe3
+                3FJQtKkODX0Uw0PZ0E4hQeCFqkdyW/WNwD291XpFCJs5P6frzQOY23chcw/kjdqR
+                NlBkBY0eb/+60/nGCse33h+kGQLwsLbmXBEe1iBCpGQyBpnaZhVUjqjiTVKY41dM
+                pyjYLLECgYEA7TUM9ftQWaz5dJqe342G1OMTtIaIDxJx5TbFBKagx7MmDf1+1K7R
+                bMiZC0foBAxD6Iw4uG0czQhFktXFEOpxdDDJoaJCtblrSya9jEn7/Cc04V+dXJE6
+                Yz+iTqBtas/y2ku66aBEAHYMu+QojElUB3iJHKvPIh4CeijCTGqRSy0CgYEAnAJ+
+                RA1Hndn0i6oMi0l69U/DqnCoJ2hXWmFVZcPLVILCPp9P76vOjKKpR2jZKX1Hzmtw
+                sjLkhBy2SKn9OFdPTuULulgmdT5ZknzsWRVet0PTFNdVMuGzlCGP4zsxd73TlxKo
+                iCS7ZqTCPqMhllhXSLmmwJNkdr/CUj6y7tesSG8CgYEAzC73OiIbNyYDENEr4qjz
+                n/rbcnC/W6H38mNj0i4QhfX60t4bN75HvUkrHB/IYvuf1OQmyvH5cbAmG0/xsy7r
+                fCWm2oBOxhiWd/kf/kuNIa8qALoKPa0xQk97Sg0kQmY/2JKJkSMIhhEXwwCRurhA
+                IbIq7EgkI20LmtXM8nRlHv0CgYAy2rE0F6wXrXuEp1rNcJdvLaAXh/+YUO/gm0fO
+                E2PNWY5eAWp6MuPyffd2OpxHZPoqNGWZAPPyiLV2vEq5ueQ1UH5hMOjgYQGruaMF
+                auzkCmzdJ1AzdNUn3UTdCmeWo788SK29K1QXIm/bISwKqSNSponPznv6JYn/a0bC
+                inUzawKBgQDi7gGMRGHJvnk3mfxkE/IN4mXqb+BBK9BudVMSb21SOxN67WjYLDMp
+                jHJ4sjThbCv3SioO4B/sjePzNJ5Hco1LLojT/G52l1ahyZejSy9tIkoPRbzoI20t
+                QKcpCpMhEbP7LYTeYJ9G/i2Xk3ucFzVtWELCtNl54K/bNtB7o5181g==
+                -----END RSA PRIVATE KEY-----
+  JWT_PUBLIC_KEY: |
+                  -----BEGIN PUBLIC KEY-----
+                  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkI6jTynXffD8Vo8N+YpX
+                  6kWHT+katorxs1N9RP5YK/cPaBCKxrFESuywC0VHRvtOqLMtlzXgxQePeLBoLV4Q
+                  MVzV324ObqHfgzf4pLnFYw7BIW7GwSixSE+yZIKttCcSKn/MJrTF3TVWRJ1nZ+ei
+                  +k9bssppVNeRh5GdHwmt4S5lWahN4KbbO4Vrz62q2b4JReHFrTpou0JWDsmvkeAv
+                  bkv806S6cbSTO/L2JJ4c2i5NBCX1erG0a764iFAW+AYqgalJfg9QUbtUoNdkl0bJ
+                  lmQ/4DFBBGrCMuMOhxLHmNXHyxs98y4NGvHMy5hDuB6sjuri0nwPrYHfaIqyX2BA
+                  gwIDAQAB
+                  -----END PUBLIC KEY----- 
+

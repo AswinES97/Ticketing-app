@@ -17,7 +17,11 @@ export class UserSignupEmail {
 
 export class Verified {
   async email (userId: string): Promise<IUserDoc | null> {
-    return await UserModel.findOneAndUpdate({ userId }, { $set: { isEmailVerified: true } }, { returnNewDocument: true })
+    return await UserModel.findOneAndUpdate({ userId }, { $set: { isEmailVerified: true } }, { new: true })
+  }
+
+  async hasVerified (userId: string): Promise<IUserDoc | null > {
+    return await UserModel.findOne({ userId }, { isEmailVerified: 1 })
   }
 }
 

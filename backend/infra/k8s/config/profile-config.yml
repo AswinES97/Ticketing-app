@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: profile-config
+  namespace: default
+data:
+  PORT: "3002"
+  NODE_ENV: "development"
+  MONGO_URL: "mongodb+srv://aswines:v6uS5bFTt3TRdq93@cluster0.4tas68l.mongodb.net/?retryWrites=true&w=majority"

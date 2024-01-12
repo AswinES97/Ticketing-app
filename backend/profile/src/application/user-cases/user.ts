@@ -1,6 +1,6 @@
 import { type kafkaParams } from '../../types/types'
 import { type UserProfile } from '../../adapters/Interfaces/repositories/profile'
-import { type IUserDoc, UserModel } from '../../frameworks/database/mongodb/model/user'
+import { type IUserDoc } from '../../frameworks/database/mongodb/model/user'
 
 import { kafakEntities } from '../../entities/user'
 
@@ -15,5 +15,9 @@ export const kafkaUseCase = async (
 }
 
 export const getUserInfo = async (userId: string, userDbCalls: UserProfile): Promise<IUserDoc | null> => {
-  return await UserModel.findOne({ userId })
+  return await userDbCalls.porfileData(userId)
+}
+
+export const usernameUpdate = async (userId: string, username: string, userDbCalls: UserProfile): Promise <IUserDoc | null> => {
+  return await userDbCalls.updateUsername(userId, username)
 }

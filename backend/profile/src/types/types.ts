@@ -17,9 +17,11 @@ export interface IUserAttr {
   dob?: Date
   gender?: string
   img?: [string]
-  isblocked: boolean
+  isBlocked?: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
+  createdAt: Date
+  updateAt: Date
 }
 
 // User Entity
@@ -38,13 +40,13 @@ export interface IUserEntity {
 }
 
 // kafka interface
-export interface IKafka {
+export interface IKafkaConsumer {
   // newtopic: (arg1: string) => Promise<void>
   consume: (arg1: KafkaMongDbInterface, arg2: consumerKeys, arg3: kafakEntitiesType) => Promise<void>
 }
 
 export interface IKafkaDbMongo {
-  createUser: (arg1: IUserEntity) => Promise<void>
+  createUser: (arg1: IUserAttr) => Promise<void>
   verifyEmail: (arg1: string) => Promise<void>
 }
 

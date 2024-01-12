@@ -1,8 +1,5 @@
 import { randomBytes, scrypt } from 'crypto'
 import { promisify } from 'util'
-import jwt, { type JwtPayload } from 'jsonwebtoken'
-
-import configKeys from '../../config/config'
 
 const scryptAsync = promisify(scrypt)
 
@@ -20,25 +17,8 @@ export class Password {
   }
 }
 
-export class Token {
-  generate (data: string): string | any {
-    // Todo error for not generating token
-    return jwt.sign(data, configKeys.JWT_SECRET)
-  }
-
-  verify (token: string): string | JwtPayload | undefined {
-    try {
-      return jwt.verify(token, configKeys.JWT_SECRET)
-    } catch (err) {
-      // todo - error for verify
-      console.log('jwt verify error')
-    }
-  }
-}
-
 export interface IUserSignup {
   hashPass: (arg1: string) => Promise<string>
   comparePass: (arg1: string, arg2: string) => Promise<boolean>
   generateToken: (arg1: string) => string
-  verifyToken: (arg1: string) => string | JwtPayload | undefined
 }

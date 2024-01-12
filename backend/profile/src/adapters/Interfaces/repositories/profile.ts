@@ -13,4 +13,8 @@ export class UserProfile implements IProfileDbRepositary {
   async porfileData (userId: string): Promise<IUserDoc | null> {
     return await this.userInfo.get(userId)
   }
+
+  async updateUsername (userId: string, username: string): Promise<IUserDoc | null> {
+    return await this.userInfo.username(userId, username)
+  }
 }

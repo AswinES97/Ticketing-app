@@ -12,3 +12,9 @@ export const user = (data: IUserAttr): IUserEntity => {
     isEmailVerified: () => data.isEmailVerified
   }
 }
+
+export const kafakEntities = {
+  user
+}
+
+export type kafakEntitiesType = typeof kafakEntities

@@ -3,13 +3,23 @@ kind: Config
 manifests:
   rawYaml:
     - "./infra/k8s-dev/**"
-    - "./infra/k8s/*"
+    - "./infra/k8s/config/**"
+    - "./infra/k8s/**" 
 deploy:
   kubectl: {}
 build:
   local:
     push: false
   artifacts:
+    - image: aswines/ticketing-apigateway
+      context: apigateway
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - dest: "src/**/*.ts"
+            src: '.'
+
     - image: aswines/ticketing-auth
       context: auth
       docker:
@@ -17,4 +27,13 @@ build:
       sync:
         manual:
           - dest: "src/**/*.ts"
+            src: '.'
+
+    - image: aswines/ticketin-profile
+      context: profile
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - dest: 'src/**/*.ts'
             src: '.'

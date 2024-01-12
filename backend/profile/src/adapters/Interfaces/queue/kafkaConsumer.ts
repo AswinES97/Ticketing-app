@@ -1,10 +1,10 @@
 import { type kafakEntitiesType } from '../../../entities/user'
 import { ConsumerFactory } from '../../../frameworks/queue/kafka/consumer'
 import { type consumerKeys } from '../../../frameworks/queue/kafka/topics'
-import { type IKafka } from '../../../types/types'
+import { type IKafkaConsumer } from '../../../types/types'
 import { type KafkaMongDbInterface } from '../repositories/kafkaDbInterface'
 
-export class KafkaConsumerInterface implements IKafka {
+export class KafkaConsumerInterface implements IKafkaConsumer {
   private readonly kafkaConsumer: ConsumerFactory
 
   constructor () {

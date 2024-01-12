@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-depl
+spec:
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+      labels:
+        app: profile
+    spec:
+      containers:
+      - name: profile
+        image: aswines/ticketing-profile
+        envFrom: 
+          - configMapRef: 
+              name: profile-config
+        resources:
+          limits:
+            memory: "1280Mi"
+            cpu: "500m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile-srv
+spec:
+  selector:
+    app: profile
+  ports:
+  - port: 3002
+    targetPort: 3002
+
+
