@@ -5,19 +5,13 @@ import { body, validationResult } from 'express-validator'
 
 const reqValidator = {
   usernameValidator: () => {
-    return body('username')
-      .trim()
-      .notEmpty()
-      .isLength({ min: 5, max: 15 })
+    return body('username').trim().notEmpty().isLength({ min: 5, max: 15 })
   },
   emailValidator: () => {
-    return body('email')
-      .isEmail()
+    return body('email').isEmail()
   },
   phoneValidator: () => {
-    return body('phone')
-      .optional()
-      .isMobilePhone('en-IN')
+    return body('phone').optional().isMobilePhone('en-IN')
   },
   passwordValidator: () => {
     return body('password')

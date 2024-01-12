@@ -1,14 +1,14 @@
 import { type IUserAttr } from '../../../types/types'
 
 import { Partitioners, type Kafka, type Producer } from 'kafkajs'
-import { KafkaProduceClient } from './kafka'
+import { KafkaClient } from './kafka'
 
 export default class ProducerFactory {
   private readonly producer: Producer
-  private readonly kafkaConfig: KafkaProduceClient
+  private readonly kafkaConfig: KafkaClient
 
   constructor () {
-    this.kafkaConfig = new KafkaProduceClient()
+    this.kafkaConfig = new KafkaClient()
     this.producer = this.createProducer(this.kafkaConfig.getClient())
   }
 

@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express'
 import { type IUserLoginParams } from '../../types/types'
-import { emailLogin } from '../../user-cases/auth/user'
+import { emailLogin } from '../../user-cases/auth/user.signin'
 
 export const userLoginController = (
   params: IUserLoginParams
@@ -8,17 +8,8 @@ export const userLoginController = (
     userEmailLogin: (arg1: Request, arg2: Response) => Promise<void>
   } => {
   const userEmailLogin = async (req: Request, res: Response): Promise<void> => {
-    const token = await emailLogin(req.body, params)
-
-    res.cookie('jwt', token?.refreshToken, {
-      httpOnly: true,
-      maxAge: 1296000,
-      sameSite: 'lax'
-    })
-
-    res.status(200).send({
-      token: token?.accessToken
-    })
+    const userNameAndUserId = await emailLogin(req.body, params)
+    res.status(200).send(userNameAndUserId)
   }
 
   return {

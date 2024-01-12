@@ -1,19 +1,10 @@
 import { Kafka } from 'kafkajs'
 
-export class KafkaProduceClient {
+export class KafkaClient {
   getClient (): Kafka {
     const kafka = new Kafka({
-      clientId: 'auth-producer',
-      brokers: ['localhost:9092']
-    })
-    return kafka
-  }
-}
-
-export class KafkaConsumerClient {
-  getClient (): Kafka {
-    const kafka = new Kafka({
-      clientId: 'auth-consumer',
+      clientId: 'auth',
+      // brokers: ['kafka:9092']
       brokers: ['localhost:9092']
     })
     return kafka

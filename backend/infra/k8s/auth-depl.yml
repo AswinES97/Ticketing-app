@@ -14,11 +14,9 @@ spec:
       containers:
       - name: auth
         image: aswines/ticketing-auth
-        # env:
-        #   - name: PORT
-        #     value: "3000"
-        #   - name: MONGO_URL
-        #     value: 'mongodb://auth-mongo-srv:27017/auth'
+        envFrom:
+          - configMapRef:
+              name: auth-config
         resources:
           limits:
             memory: "1280Mi"
@@ -34,7 +32,7 @@ spec:
   selector:
     app: auth
   ports:
-  - port: 3000
-    targetPort: 3000
+  - port: 3001
+    targetPort: 3001
 
 

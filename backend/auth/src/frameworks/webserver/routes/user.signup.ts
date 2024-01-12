@@ -7,8 +7,6 @@ import { userSignupController } from '../../../adapters/controllers/user.signup'
 import { UserSignupDbInterface } from '../../../adapters/Interfaces/repositories/userSignupDBInterface'
 import { UserSignupServiceI } from '../../../adapters/Interfaces/services/user.signup'
 
-import reqValidator from '../middleware/reqValidator'
-
 export const userSignupRouter = (express: expressType): Router => {
   const router = express.Router()
 
@@ -18,17 +16,10 @@ export const userSignupRouter = (express: expressType): Router => {
     kafkaCalls: new KafkaInterface()
   })
 
-  router.post('/email',
-    [
-      reqValidator.usernameValidator(),
-      reqValidator.emailValidator(),
-      reqValidator.passwordValidator(),
-      reqValidator.validatorFn
-    ],
-    controller.userEmailSignup
-  )
-
-  router.get('/verify-email/:token', controller.userEmailVerify)
+  router
+    .route('/email')
+    .get(controller.userEmailVerify)
+    .post(controller.userEmailSignup)
 
   return router
 }

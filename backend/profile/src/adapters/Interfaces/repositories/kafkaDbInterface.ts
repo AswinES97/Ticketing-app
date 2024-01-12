@@ -1,5 +1,5 @@
 import { User, Verify } from '../../../frameworks/database/mongodb/repositories/profile'
-import { type IKafkaDbMongo, type IUserEntity } from '../../../types/types'
+import { type IUserAttr, type IKafkaDbMongo } from '../../../types/types'
 
 export class KafkaMongDbInterface implements IKafkaDbMongo {
   private readonly user: User
@@ -9,7 +9,7 @@ export class KafkaMongDbInterface implements IKafkaDbMongo {
     this.verify = new Verify()
   }
 
-  async createUser (userData: IUserEntity): Promise<void> {
+  async createUser (userData: IUserAttr): Promise<void> {
     await this.user.create(userData)
   }
 

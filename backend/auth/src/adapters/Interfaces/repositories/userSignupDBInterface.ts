@@ -25,4 +25,8 @@ export class UserSignupDbInterface implements IUserDBCalls {
   async verifiedEmail (userId: string): Promise<IUserDoc | null> {
     return await this.updateVerifid.email(userId)
   }
+
+  async isVerified (userId: string): Promise<IUserDoc | null> {
+    return await this.updateVerifid.hasVerified(userId)
+  }
 }

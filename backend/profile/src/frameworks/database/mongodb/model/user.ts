@@ -16,6 +16,8 @@ export interface IUserDoc extends mongoose.Document {
   isBlocked: boolean
   isPhoneVerified?: boolean
   isEmailVerified?: boolean
+  gender?: string
+  img?: [string]
 }
 
 const userSchema = new mongoose.Schema({
@@ -47,8 +49,7 @@ const userSchema = new mongoose.Schema({
   },
   isEmailVerified: {
     type: Boolean,
-    required: true,
-    default: false
+    required: true
   },
   dob: {
     type: Date
@@ -58,16 +59,21 @@ const userSchema = new mongoose.Schema({
   },
   img: {
     type: [String]
+  },
+  createdAt: {
+    type: Date
+  },
+  updatedAt: {
+    type: Date
   }
-
 }, {
-  timestamps: true,
   // to delete _id, _v, password from return document
   toJSON: {
     transform (doc, ret) {
       delete ret._id
       delete ret.__v
       delete ret.password
+      delete ret.updatedAt
     }
   }
 })

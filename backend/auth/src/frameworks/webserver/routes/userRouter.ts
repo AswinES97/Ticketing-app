@@ -2,7 +2,8 @@ import { type Router } from 'express'
 import { type expressType } from '../../../types/types'
 
 import { userSignupRouter } from './user.signup'
-import { userLoginRouter } from './user.login'
+import { userLoginRouter } from './user.signin'
+import { tokenRouter } from './token'
 
 export const userRouter = (express: expressType): Router => {
   const router = express.Router()
@@ -10,6 +11,8 @@ export const userRouter = (express: expressType): Router => {
   router.use('/signup', userSignupRouter(express))
 
   router.use('/signin', userLoginRouter(express))
+
+  router.use('/token', tokenRouter(express))
 
   return router
 }

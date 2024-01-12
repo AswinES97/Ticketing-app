@@ -1,3 +1,5 @@
+// import { KafkaConsumerInterface, type KafkaInterface } from '../adapters/Interfaces/queue/kafka'
+// import { KafkaMongDbInterface } from '../adapters/Interfaces/repositories/kafkaDbInterface'
 import { type KafkaInterface } from '../adapters/Interfaces/queue/kafka'
 import { type UserLoginDBInterface } from '../adapters/Interfaces/repositories/userLoginDBInterface'
 import { type UserSignupDbInterface } from '../adapters/Interfaces/repositories/userSignupDBInterface'
@@ -44,7 +46,18 @@ export interface IUserEntity {
 }
 
 // kafka interface
-export interface IKafka {
+export interface IKafkaProducer {
   // newtopic: (arg1: string) => Promise<void>
   produce: (arg1: IUserAttr, agr2: string) => Promise<void>
+}
+
+export interface kafkaParams {
+  kafaCalls: KafkaConsumerInterface
+  kakfaMongDbCalls: KafkaMongDbInterface
+  consumerKeys: consumerKeys
+}
+
+export interface IKafkaConsumer {
+  // newtopic: (arg1: string) => Promise<void>
+  consume: (arg1: KafkaMongDbInterface, arg2: consumerKeys, arg3: kafakEntitiesType) => Promise<void>
 }

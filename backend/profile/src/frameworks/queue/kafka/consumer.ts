@@ -1,16 +1,17 @@
 import { type Consumer, type EachMessagePayload } from 'kafkajs'
 import { type KafkaMongDbInterface } from '../../../adapters/Interfaces/repositories/kafkaDbInterface'
 import { type consumerKeys } from './topics'
-import { type IUserAttr } from '../../../types/types'
+// import { type IUserAttr } from '../../../types/types'
 import { type kafakEntitiesType } from '../../../entities/user'
 
 import { KafkaClient } from './kafkaConfig'
 
 export class ConsumerFactory {
-  private readonly kafkaConfig = new KafkaClient()
+  private readonly kafkaConfig: KafkaClient
   private readonly consumer: Consumer
 
   constructor () {
+    this.kafkaConfig = new KafkaClient()
     this.consumer = this.consumerInit()
   }
 
@@ -34,14 +35,10 @@ export class ConsumerFactory {
       }: EachMessagePayload) => {
         const key = message.key?.toString()
         const value = message.value?.toString()
-
+        console.log('kafka value: ', value)
         switch (key) {
-          case consumerKeys.newUser:
-            await kafkaMongoDbCalls.createUser(kafakEntities.user(JSON.parse(value as string) as IUserAttr))
-            break
-
           case consumerKeys.emailVerified:
-            await kafkaMongoDbCalls.verifyEmail(JSON.parse(value as string))
+            await kafkaMongoDbCalls.createUser(JSON.parse(value as string))
             break
 
           default:
