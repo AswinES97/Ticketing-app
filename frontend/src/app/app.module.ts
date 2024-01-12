@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,25 +8,37 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 import { StoreModule } from '@ngrx/store';
-import { HomeModule } from './components/home/home.module';
 
+import { HomeModule } from './components/home/home.module';
+import { WildcardComponent } from './components/wildcard/wildcard.component';
+import { userReducer } from './components/ngrx/user.reducer';
+import { EmailverificationComponent } from './components/emailverification/emailverification.component';
+import { httpInterceptorProviders } from './interceptor';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, WildcardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HomeModule,
-    ToastrModule.forRoot(),
-    StoreModule.forRoot({}, {})
+    EmailverificationComponent,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      progressBar: true,
+      easing: 'ease-out',
+      easeTime: 100,
+      positionClass: 'toast-top-center',
+    }),
+    StoreModule.forRoot({ user: userReducer }, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
+    httpInterceptorProviders,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

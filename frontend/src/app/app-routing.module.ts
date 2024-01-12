@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmailSentComponent } from './components/auth/email-sent/email-sent.component';
 import { HomeComponent } from './components/home/home.component';
 import { canActivate } from './authGuard/canActivate';
+import { WildcardComponent } from './components/wildcard/wildcard.component';
 
 const routes: Routes = [{
   path:'',
@@ -13,8 +14,19 @@ const routes: Routes = [{
   loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule),
   canActivate: [canActivate]
 },{
+  path: 'profile',
+  loadChildren: () => import('./components/profile/profile.module').then(m=>m.ProfileModule),
+},{
   path: 'email-sent',
-  component: EmailSentComponent
+  component: EmailSentComponent,
+  canActivate: [canActivate]
+},{
+  path: 'email-verification/:token',
+  loadComponent: () => import('./components/emailverification/emailverification.component').then((c)=>c.EmailverificationComponent),
+  canActivate: [canActivate]
+},{
+  path:'**',
+  component: WildcardComponent
 }];
 
 @NgModule({
