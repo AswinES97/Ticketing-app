@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { EmailSentComponent } from './email-sent/email-sent.component';
 
 
@@ -22,7 +21,6 @@ import { EmailSentComponent } from './email-sent/email-sent.component';
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
   ],
   exports: [
     SignupComponent,

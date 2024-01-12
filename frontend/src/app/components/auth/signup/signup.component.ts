@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorHandlerService } from 'src/app/services/error-haandler.service';
-import { catchError, pipe, retry } from "rxjs"
+import { catchError } from "rxjs"
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 

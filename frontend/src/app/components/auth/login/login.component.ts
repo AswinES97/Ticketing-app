@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, retry } from 'rxjs';
+import { Observable, catchError, retry } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorHandlerService } from 'src/app/services/error-haandler.service';
 import { jwtDecode } from 'jwt-decode';
+import { Store } from '@ngrx/store';
+import { saveUser } from '../../ngrx/user.action';
+import { userStore } from 'src/types/types';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +18,18 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class LoginComponent {
   isDisabled: boolean = false
+  user$:Observable<object>
+
   constructor(
+    private userStore: Store<{user:object}>,
     private formBuilder: FormBuilder, 
     private authService: AuthService,
     private toaster: ToastrService,
     private errorhandler: ErrorHandlerService,
     private router: Router
-    ) { }
+    ) { 
+      this.user$ = userStore.select('user')
+    }
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -57,9 +65,11 @@ export class LoginComponent {
       )
       .subscribe(data=>{
         const response = data as responseData
-        const payload = jwtDecode(response.token)
+        const payload:userStore = jwtDecode(response.accessToken)
         
-        localStorage.setItem('token', response.token)
+        this.userStore.dispatch(saveUser({user:payload.data}))
+        
+        localStorage.setItem('accessToken', response.accessToken)
         this.router.navigate(['/'])
     })
     }else{
@@ -71,5 +81,5 @@ export class LoginComponent {
 }
 
 type responseData = {
-  token: string
+  accessToken: string
 }
